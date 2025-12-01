@@ -107,7 +107,7 @@ export default function SpeedTestCard() {
                                 <Zap size={14} className={styles.iconSpin} />
                                 {t.speedTest.smartSchedule}...
                             </span>
-                        ) : t.speedTest.restart}
+                        ) : t.speedTest.retest}
                     </button>
                 </div>
             </div>
