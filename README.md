@@ -1,5 +1,9 @@
 <div align="center">
-  <img src="public/icon.svg" width="120" alt="LyraNet Logo" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="public/icon-white.svg">
+    <source media="(prefers-color-scheme: light)" srcset="public/icon-black.svg">
+    <img alt="LyraNet Logo" src="public/icon-black.svg" width="120">
+  </picture>
   <h1>LyraNet</h1>
 </div>
 

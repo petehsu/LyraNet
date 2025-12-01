@@ -1,14 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <style>
+    .s { stroke: #000000; }
+    .f { fill: #000000; }
+    @media (prefers-color-scheme: dark) {
+      .s { stroke: #ffffff; }
+      .f { fill: #ffffff; }
+    }
+  </style>
   <g transform="translate(256, 256)">
     <path d="M0 -180 L156 -90 L156 90 L0 180 L-156 90 L-156 -90 Z" 
-          fill="none" stroke="#6366f1" stroke-width="10" stroke-linejoin="round" />
-    <g stroke="#6366f1" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          fill="none" class="s" stroke-width="10" stroke-linejoin="round" />
+    <g class="s" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none">
       <path d="M0 -90 L90 0 L0 90 L-90 0 Z" />
       <line x1="0" y1="-180" x2="0" y2="-90" />
       <line x1="0" y1="180" x2="0" y2="90" />
       <line x1="-156" y1="0" x2="-90" y2="0" />
       <line x1="156" y1="0" x2="90" y2="0" />
-      <circle cx="0" cy="0" r="16" fill="#6366f1" stroke="none" />
+      <circle cx="0" cy="0" r="16" class="f" stroke="none" />
     </g>
   </g>
 </svg>
