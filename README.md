@@ -5,9 +5,14 @@
     <img alt="LyraNet Logo" src="public/icon-black.svg" width="120">
   </picture>
   <h1>LyraNet</h1>
+  <a href="https://lyra-net.vercel.app/">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge&logo=vercel" alt="Live Demo" />
+  </a>
 </div>
 
 **LyraNet** is a modern, comprehensive network environment analysis tool designed to provide users with deep insights into their network connection. It combines real-time IP analysis, risk assessment, and performance testing into a single, beautiful interface.
+
+> **Live Demo**: [https://lyra-net.vercel.app/](https://lyra-net.vercel.app/)
 
 [English](#english) | [中文](#chinese)
 
