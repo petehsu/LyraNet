@@ -110,19 +110,36 @@ export const zh: Translations = {
     speedTest: {
         title: '网速测试',
         start: '开始测试',
-        restart: '重新测试',
+        retest: '重新测试',
         download: '下载',
         upload: '上传',
         ping: '延迟',
         jitter: '抖动',
         mbps: 'Mbps',
         ms: 'ms',
+        idle: '准备就绪',
+        selecting: '正在选择服务器...',
+        optimizing: '正在优化线路...',
         testing: '测试中...',
-        idle: '空闲',
-        selecting: '正在智能调度节点...',
-        optimizing: '优化线路中...',
-        server: '测速节点',
+        server: '服务器',
         smartSchedule: '智能调度',
+    },
+    about: {
+        title: 'LyraNet',
+        subtitle: '专业的网络环境分析工具',
+        security: {
+            title: '安全至上',
+            desc: '实时风险评估和隐私泄露检测，保障您的连接安全。',
+        },
+        performance: {
+            title: '高性能',
+            desc: '智能测速与服务器选择，提供精准的测试结果。',
+        },
+        insight: {
+            title: '全球洞察',
+            desc: '详细的 IP 分析，包括运营商、ASN 和精准的地理定位数据。',
+        },
+        viewOnGithub: '在 GitHub 上查看',
     },
     suggestions: {
         title: '优化建议',
@@ -133,6 +150,7 @@ export const zh: Translations = {
             WEBRTC_LEAK: '检测到 WebRTC 泄露。请禁用 WebRTC 或使用隐私扩展。',
             FP_INCONSISTENT: '浏览器指纹不一致。请检查您的系统时间和语言设置。',
             GPS_MISMATCH: 'GPS 位置与 IP 位置不匹配。请确认您的 VPN 位置。',
+            IP_DATACENTER: '检测到机房 IP。',
         }
     },
 };

@@ -1,0 +1,42 @@
+import React from 'react';
+
+interface LogoProps {
+    size?: number;
+    className?: string;
+}
+
+export default function Logo({ size = 32, className }: LogoProps) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            width={size}
+            height={size}
+            className={className}
+        >
+            <g transform="translate(256, 256)">
+                <path
+                    d="M0 -180 L156 -90 L156 90 L0 180 L-156 90 L-156 -90 Z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="10"
+                    strokeLinejoin="round"
+                />
+                <g
+                    stroke="currentColor"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                >
+                    <path d="M0 -90 L90 0 L0 90 L-90 0 Z" />
+                    <line x1="0" y1="-180" x2="0" y2="-90" />
+                    <line x1="0" y1="180" x2="0" y2="90" />
+                    <line x1="-156" y1="0" x2="-90" y2="0" />
+                    <line x1="156" y1="0" x2="90" y2="0" />
+                    <circle cx="0" cy="0" r="16" fill="currentColor" stroke="none" />
+                </g>
+            </g>
+        </svg>
+    );
+}

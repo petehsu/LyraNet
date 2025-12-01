@@ -1,4 +1,7 @@
-# LyraNet
+<div align="center">
+  <img src="public/icon.svg" width="120" alt="LyraNet Logo" />
+  <h1>LyraNet</h1>
+</div>
 
 **LyraNet** is a modern, comprehensive network environment analysis tool designed to provide users with deep insights into their network connection. It combines real-time IP analysis, risk assessment, and performance testing into a single, beautiful interface.
 

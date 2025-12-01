@@ -96,7 +96,7 @@ export interface Translations {
     speedTest: {
         title: string;
         start: string;
-        restart: string;
+        retest: string;
         download: string;
         upload: string;
         ping: string;
@@ -119,6 +119,24 @@ export interface Translations {
             WEBRTC_LEAK: string;
             FP_INCONSISTENT: string;
             GPS_MISMATCH: string;
+            IP_DATACENTER: string;
         };
+    };
+    about: {
+        title: string;
+        subtitle: string;
+        security: {
+            title: string;
+            desc: string;
+        };
+        performance: {
+            title: string;
+            desc: string;
+        };
+        insight: {
+            title: string;
+            desc: string;
+        };
+        viewOnGithub: string;
     };
 }

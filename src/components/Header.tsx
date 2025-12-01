@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 import { useTranslation } from '@/i18n/context';
 
+import Logo from './Logo';
+
 export default function Header() {
     const { t, locale, setLocale } = useTranslation();
 
@@ -12,7 +14,7 @@ export default function Header() {
             <div className={styles.container}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                     <div className={styles.logo}>
-                        <span className={styles.logoIcon}>🛡️</span>
+                        <Logo size={24} />
                         LyraNet
                     </div>
                     <div className={styles.status} style={{ marginLeft: '0' }}>
@@ -23,7 +25,6 @@ export default function Header() {
 
                 <nav className={styles.nav}>
                     <Link href="/" className={styles.navLink}>{t.header.dashboard}</Link>
-                    <Link href="/tools" className={styles.navLink}>{t.header.tools}</Link>
                     <Link href="/about" className={styles.navLink}>{t.header.about}</Link>
                 </nav>
 

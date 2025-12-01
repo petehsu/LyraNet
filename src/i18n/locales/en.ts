@@ -110,7 +110,7 @@ export const en: Translations = {
     speedTest: {
         title: 'Speed Test',
         start: 'Start Test',
-        restart: 'Retest',
+        retest: 'Retest',
         download: 'Download',
         upload: 'Upload',
         ping: 'Ping',
@@ -118,11 +118,28 @@ export const en: Translations = {
         mbps: 'Mbps',
         ms: 'ms',
         testing: 'Testing...',
-        idle: 'Idle',
-        selecting: 'Selecting best server...',
-        optimizing: 'Optimizing route...',
+        idle: 'Ready',
+        selecting: 'Selecting Server...',
+        optimizing: 'Optimizing Route...',
         server: 'Server',
         smartSchedule: 'Smart Scheduling',
+    },
+    about: {
+        title: 'LyraNet',
+        subtitle: 'Professional Network Environment Analysis Tool',
+        security: {
+            title: 'Security First',
+            desc: 'Real-time risk assessment and privacy leak detection to keep your connection secure.',
+        },
+        performance: {
+            title: 'High Performance',
+            desc: 'Smart speed testing with intelligent server selection for accurate results.',
+        },
+        insight: {
+            title: 'Global Insight',
+            desc: 'Detailed IP analysis including ISP, ASN, and precise geolocation data.',
+        },
+        viewOnGithub: 'View on GitHub',
     },
     suggestions: {
         title: 'Optimization Suggestions',
@@ -133,6 +150,7 @@ export const en: Translations = {
             WEBRTC_LEAK: 'WebRTC leak detected. Disable WebRTC or use a privacy extension.',
             FP_INCONSISTENT: 'Browser fingerprint is inconsistent. Check your system time and language settings.',
             GPS_MISMATCH: 'GPS location does not match IP location. Confirm your VPN location.',
+            IP_DATACENTER: 'Datacenter IP detected.',
         }
     },
 };

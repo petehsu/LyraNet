@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "LyraNet - Network Environment Detection",
   description: "Comprehensive network environment analysis tool",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 import { I18nProvider } from "@/i18n/context";
