@@ -51,8 +51,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main-content {
+  padding: 84px 0 2rem 0;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .main-content {
+    height: auto;
+    overflow: visible;
+    justify-content: flex-start;
+    padding-bottom: 4rem;
+  }
 }
 
 /* Global Scrollbar */

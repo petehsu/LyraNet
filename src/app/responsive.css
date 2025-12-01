@@ -20,6 +20,8 @@
     /* Switch to 1 column on mobile */
     .bento-grid {
         grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        padding-bottom: 2rem;
     }
 
     .span-2 {

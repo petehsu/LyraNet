@@ -25,14 +25,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <I18nProvider>
           <Header />
-          <main style={{
-            padding: '84px 0 2rem 0',
-            height: '100vh',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center'
-          }}>
+          <main className="main-content">
             {children}
           </main>
         </I18nProvider>
