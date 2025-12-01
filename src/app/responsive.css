@@ -1,0 +1,28 @@
+/* Add to src/app/globals.css */
+
+@media (max-width: 1400px) {
+
+    /* Switch to 2 columns on medium screens */
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: auto !important;
+        height: auto !important;
+    }
+
+    /* Adjust spans for 2-column layout */
+    .span-2 {
+        grid-column: span 2 !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Switch to 1 column on mobile */
+    .bento-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .span-2 {
+        grid-column: span 1 !important;
+    }
+}

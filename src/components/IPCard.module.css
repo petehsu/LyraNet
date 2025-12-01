@@ -1,0 +1,111 @@
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--primary);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ipDisplay {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.ipLabel {
+    display: none;
+    /* Hidden as title is now in header */
+}
+
+.ipValue {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+    word-break: break-all;
+    /* Prevent overflow for IPv6 */
+    line-height: 1.2;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: auto;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+}
+
+.value {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.proxyStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.proxyDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}

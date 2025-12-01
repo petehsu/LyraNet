@@ -1,0 +1,173 @@
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--primary);
+}
+
+.statusBadge {
+    font-size: 0.7rem;
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 1rem;
+}
+
+.gaugeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+}
+
+.speedValue {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.speedUnit {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.serverInfo {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    opacity: 0.8;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+    margin-top: auto;
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+.statLabel {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.statValue {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.startButton {
+    width: 100%;
+    padding: 0.6rem;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.startButton:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.startButton:disabled {
+    opacity: 0.8;
+    cursor: wait;
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.iconSpin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
