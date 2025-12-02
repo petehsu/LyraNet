@@ -17,67 +17,138 @@ export interface SpeedTestServer {
     host: string;
 }
 
-const SERVERS: SpeedTestServer[] = [
-    { id: 'us-west', name: 'Cloudflare', location: 'San Jose, CA', host: 'speed.cloudflare.com' },
-    { id: 'us-east', name: 'AWS CloudFront', location: 'N. Virginia, US', host: 'aws.amazon.com' },
-    { id: 'eu-central', name: 'Deutsche Telekom', location: 'Frankfurt, DE', host: 'speedtest.telekom.de' },
-    { id: 'asia-east', name: 'Google Cloud', location: 'Tokyo, JP', host: 'google.com' },
-];
+const CLOUDFLARE_ENDPOINT = 'https://speed.cloudflare.com';
 
 export async function selectBestServer(): Promise<SpeedTestServer> {
-    // Simulate pinging servers to find the best one
-    // In a real app, we would do HEAD requests to these endpoints and measure latency
+    // For real testing, we use Cloudflare's Anycast network which automatically routes to the nearest server
     return new Promise((resolve) => {
         setTimeout(() => {
-            // Randomly select a "best" server for simulation
-            const server = SERVERS[Math.floor(Math.random() * SERVERS.length)];
-            resolve(server);
-        }, 1500); // 1.5s delay to simulate "smart scheduling"
+            resolve({
+                id: 'auto',
+                name: 'Cloudflare Global',
+                location: 'Auto-detected',
+                host: 'speed.cloudflare.com'
+            });
+        }, 800);
     });
 }
 
-export function runSmartSpeedTest(
+async function measurePing(): Promise<{ ping: number; jitter: number }> {
+    const pings: number[] = [];
+    // Ping 5 times
+    for (let i = 0; i < 5; i++) {
+        const start = performance.now();
+        try {
+            await fetch(`${CLOUDFLARE_ENDPOINT}/__down?bytes=0&t=${Date.now()}`, { mode: 'cors', cache: 'no-store' });
+            const end = performance.now();
+            pings.push(end - start);
+        } catch (e) {
+            console.error('Ping failed', e);
+        }
+    }
+
+    if (pings.length === 0) return { ping: 0, jitter: 0 };
+
+    const minPing = Math.min(...pings);
+    const avgPing = pings.reduce((a, b) => a + b, 0) / pings.length;
+    // Calculate jitter (mean deviation)
+    const jitter = pings.reduce((a, b) => a + Math.abs(b - avgPing), 0) / pings.length;
+
+    return { ping: Math.round(minPing), jitter: Math.round(jitter) };
+}
+
+async function measureDownload(onProgress: (mbps: number) => void): Promise<number> {
+    // Download ~10MB
+    const size = 10 * 1024 * 1024;
+    const startTime = performance.now();
+
+    try {
+        const response = await fetch(`${CLOUDFLARE_ENDPOINT}/__down?bytes=${size}`, { mode: 'cors', cache: 'no-store' });
+        const reader = response.body?.getReader();
+        if (!reader) return 0;
+
+        let receivedLength = 0;
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            receivedLength += value.length;
+
+            const currentTime = performance.now();
+            const duration = (currentTime - startTime) / 1000; // seconds
+            if (duration > 0.1) { // Update only if enough time passed to avoid Infinity
+                const mbps = (receivedLength * 8) / (duration * 1000 * 1000);
+                onProgress(mbps);
+            }
+        }
+
+        const totalTime = (performance.now() - startTime) / 1000;
+        return (size * 8) / (totalTime * 1000 * 1000);
+    } catch (e) {
+        console.error('Download test failed', e);
+        return 0;
+    }
+}
+
+async function measureUpload(onProgress: (mbps: number) => void): Promise<number> {
+    // Upload ~5MB
+    const size = 5 * 1024 * 1024;
+    const data = new Uint8Array(size);
+    const startTime = performance.now();
+
+    return new Promise((resolve) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${CLOUDFLARE_ENDPOINT}/__up`);
+
+        xhr.upload.onprogress = (event) => {
+            const duration = (performance.now() - startTime) / 1000;
+            if (duration > 0.1) {
+                const mbps = (event.loaded * 8) / (duration * 1000 * 1000);
+                onProgress(mbps);
+            }
+        };
+
+        xhr.onload = () => {
+            const totalTime = (performance.now() - startTime) / 1000;
+            const mbps = (size * 8) / (totalTime * 1000 * 1000);
+            resolve(mbps);
+        };
+
+        xhr.onerror = () => {
+            console.error('Upload test failed');
+            resolve(0);
+        };
+
+        xhr.send(data);
+    });
+}
+
+export async function runSmartSpeedTest(
     onProgress: (data: { download?: number; upload?: number; ping?: number; phase: 'download' | 'upload' | 'ping' }) => void
 ): Promise<SpeedTestResult> {
-    return new Promise((resolve) => {
-        let download = 0;
-        let upload = 0;
-        const ping = Math.floor(Math.random() * 20) + 5; // 5-25ms
-        const jitter = Math.floor(Math.random() * 5);
 
-        // Phase 1: Download (Simulated)
-        let progress = 0;
-        const dlInterval = setInterval(() => {
-            progress += 2;
-            download = Math.min(1000, download + Math.random() * 80); // Ramps up to ~1000
-            onProgress({ download, phase: 'download' });
+    // 1. Ping Test
+    const { ping, jitter } = await measurePing();
+    onProgress({ ping, phase: 'ping' });
 
-            if (progress >= 100) {
-                clearInterval(dlInterval);
-
-                // Phase 2: Upload (Simulated)
-                let upProgress = 0;
-                const upInterval = setInterval(() => {
-                    upProgress += 4;
-                    upload = Math.min(500, upload + Math.random() * 40);
-                    onProgress({ download, upload, phase: 'upload' });
-
-                    if (upProgress >= 100) {
-                        clearInterval(upInterval);
-                        resolve({
-                            download,
-                            upload,
-                            ping,
-                            jitter,
-                            server: {
-                                name: 'Cloudflare Edge',
-                                location: 'Auto-detected',
-                                distance: 12
-                            }
-                        });
-                    }
-                }, 50);
-            }
-        }, 50);
+    // 2. Download Test
+    const download = await measureDownload((mbps) => {
+        onProgress({ download: mbps, phase: 'download' });
     });
+
+    // 3. Upload Test
+    const upload = await measureUpload((mbps) => {
+        onProgress({ upload: mbps, phase: 'upload' });
+    });
+
+    return {
+        download,
+        upload,
+        ping,
+        jitter,
+        server: {
+            name: 'Cloudflare Global',
+            location: 'Nearest Node',
+            distance: 0
+        }
+    };
 }
